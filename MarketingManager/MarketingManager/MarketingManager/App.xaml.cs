@@ -13,7 +13,7 @@ namespace MarketingManager
 		{
 			InitializeComponent();
             new ProgramController();
-            MainPage = new ProcessPage();
+            MainPage = new NavigationPage(new ProcessPage());
 		}
 
 		protected override void OnStart ()
