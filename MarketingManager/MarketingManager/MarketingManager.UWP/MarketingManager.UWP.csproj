@@ -103,6 +103,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Add.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -166,7 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MarketingManager\MarketingManager.csproj">
-      <Project>{86F7437D-786A-4A3D-B36B-D3BE7D86DDE0}</Project>
+      <Project>{c1788eec-5648-4d58-bee4-ec80d65c7608}</Project>
       <Name>MarketingManager</Name>
     </ProjectReference>
   </ItemGroup>

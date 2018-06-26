@@ -1,3 +1,5 @@
+using MarketingManager.Container;
+using MarketingManager.Pages;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,8 +12,8 @@ namespace MarketingManager
 		public App ()
 		{
 			InitializeComponent();
-
-			MainPage = new MainPage();
+            new ProgramController();
+            MainPage = new ProcessPage();
 		}
 
 		protected override void OnStart ()
