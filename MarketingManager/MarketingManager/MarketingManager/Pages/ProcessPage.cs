@@ -14,12 +14,14 @@ namespace MarketingManager.Pages
         List<PackeageViewModel> SelectedList;
         Frame GridFrame;
         Label fiyatLbl;
+        Entry entry;
 
         public ProcessPage()
         {
             SelectedList = new List<PackeageViewModel>();
             ToolbarItems.Add(new ToolbarItem() { Text = "Fiyatları Düzenle", Priority = 2, Command = new Command(EditPageNavigate) });
             GridFrame = new Frame();
+            entry = new Entry() { VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center, Placeholder = "Öğrenci Sayısı Giriniz", Keyboard = Keyboard.Numeric, TextColor = ProgramController.EbirdColor };
             fiyatLbl = new Label() { VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center, Text = "0 TL", TextColor = ProgramController.EbirdColor };
             ComponentLoad();
         }
@@ -56,7 +58,7 @@ namespace MarketingManager.Pages
             StackLayout mainStack = new StackLayout();
             frame.Content = mainStack;
 
-            stackLayout.Children.Add(new Entry() { VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center, Placeholder = "Öğrenci Sayısı Giriniz", Keyboard = Keyboard.Numeric, TextColor = ProgramController.EbirdColor });
+            stackLayout.Children.Add(entry);
             stackLayout.Children.Add(new Button() { VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center, BackgroundColor = ProgramController.EbirdColor, Text = "Hesapla", TextColor = Color.White, Command = new Command(Calculate) });
 
             mainStack.Children.Add(stackLayout);
@@ -138,8 +140,42 @@ namespace MarketingManager.Pages
 
         private void Calculate(object obj)
         {
-            double value = SelectedList.Sum(i => i.Model.Money * i.Quantity);
-            fiyatLbl.Text = $"{value} TL";
+            if (string.IsNullOrWhiteSpace(entry.Text))
+            {
+                fiyatLbl.Text = "Bu alan boş geçilemez. Lütfen öğrenci sayısı giriniz!";
+                return;
+            }
+            try
+            {
+                int deger = Int32.Parse(entry.Text);
+                float value = SelectedList.Sum(i => i.Model.Money * i.Quantity);
+                fiyatLbl.Text = $"{Discont(deger, value)} TL";
+            }
+            catch
+            {
+                fiyatLbl.Text = "Hatalı giriş yaptınız. Lütfen sadece sayı giriniz!";
+                entry.Text = "";
+            }
+        }
+
+        private float Discont(int student, float money)
+        {
+            float result = student * money;
+            float discont = 0;
+            if (student > 150)
+            {
+                discont = 30f / 100f * result;
+            }
+            else if (student > 100)
+            {
+                discont = 20f / 100f * result;
+            }
+            else if (student > 50)
+            {
+                discont = 10f / 100f * result;
+            }
+            result -= discont;
+            return result;
         }
 
         private void EditPageNavigate(object obj)

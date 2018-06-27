@@ -8,6 +8,6 @@ namespace MarketingManager.Data
     {
         public int ID { get; set; }
         public string Title { get; set; }
-        public double Money { get; set; }
+        public float Money { get; set; }
     }
 }
