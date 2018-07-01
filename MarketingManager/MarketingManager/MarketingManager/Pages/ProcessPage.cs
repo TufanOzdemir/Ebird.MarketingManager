@@ -45,7 +45,7 @@ namespace MarketingManager.Pages
             StackLayout stackLayout = new StackLayout() { Padding = 0, Spacing = 0 };
             frame.Content = stackLayout;
 
-            stackLayout.Children.Add(new Image() { Source = "Assets/ebird small logo.png", Margin = 10, WidthRequest = 400, HeightRequest = 250 });
+            stackLayout.Children.Add(new Image() { Source = "Assets/ebird.png", Margin = 10, WidthRequest = 400, HeightRequest = 250 });
             //stackLayout.Children.Add(new Label() { Text = "ESOF Paket Özelleştirme Aracı", HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center, FontSize = 45, FontAttributes = FontAttributes.Bold, Margin = new Thickness(0, 0, 0, 10), TextColor = ProgramController.EbirdColor });
 
             return frame;
