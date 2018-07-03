@@ -16,7 +16,7 @@ namespace MarketingManager.Container
             EbirdColor = Color.FromHex("#00A0E3");
 
             PackeageList = new List<Packeage>();
-            PackeageList.Add(new Packeage() { ID = 1, Money = 85, Title = "Haftalık 1 Saatlik Ders" });
+            PackeageList.Add(new Packeage() { ID = 1, Money = 150, Title = "Haftalık 1 Saatlik Ders" });
             PackeageList.Add(new Packeage() { ID = 2, Money = 120, Title = "Dergi Desteği" });
             PackeageList.Add(new Packeage() { ID = 3, Money = 85, Title = "Kitap Desteği" });
             PackeageList.Add(new Packeage() { ID = 4, Money = 110, Title = "Video Desteği" });

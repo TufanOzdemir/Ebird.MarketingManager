@@ -14,6 +14,7 @@ namespace MarketingManager.Pages
         List<PackeageViewModel> SelectedList;
         Frame GridFrame;
         Label fiyatLbl;
+        Label aylikFiyatLbl;
         Entry entry;
 
         public ProcessPage()
@@ -22,7 +23,8 @@ namespace MarketingManager.Pages
             ToolbarItems.Add(new ToolbarItem() { Text = "Fiyatları Düzenle", Priority = 2, Command = new Command(EditPageNavigate) });
             GridFrame = new Frame();
             entry = new Entry() { VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center, Placeholder = "Öğrenci Sayısı Giriniz", Keyboard = Keyboard.Numeric, TextColor = ProgramController.EbirdColor };
-            fiyatLbl = new Label() { VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center, Text = "0 TL", TextColor = ProgramController.EbirdColor };
+            fiyatLbl = new Label() { VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center, Text = "İlk Ay Fiyatı: 0 TL", TextColor = ProgramController.EbirdColor };
+            aylikFiyatLbl = new Label() { VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center, Text = "Aylık Fiyatı: 0 TL", TextColor = ProgramController.EbirdColor };
             ComponentLoad();
         }
 
@@ -63,12 +65,13 @@ namespace MarketingManager.Pages
 
             mainStack.Children.Add(stackLayout);
             mainStack.Children.Add(fiyatLbl);
+            mainStack.Children.Add(aylikFiyatLbl);
             return frame;
         }
 
         private void GridLoad()
         {
-            DynamicGrid dynamicGrid = new DynamicGrid(2) { Margin = 5 };
+            DynamicGrid dynamicGrid = new DynamicGrid(2) { Margin = 5, ColumnSpacing = 5 };
             dynamicGrid.AddView(PageLeft());
             dynamicGrid.AddView(PageRight());
 
@@ -143,39 +146,51 @@ namespace MarketingManager.Pages
             if (string.IsNullOrWhiteSpace(entry.Text))
             {
                 fiyatLbl.Text = "Bu alan boş geçilemez. Lütfen öğrenci sayısı giriniz!";
+                aylikFiyatLbl.Text = "";
                 return;
             }
             try
             {
                 int deger = Int32.Parse(entry.Text);
-                float value = SelectedList.Sum(i => i.Model.Money * i.Quantity);
-                fiyatLbl.Text = $"{Discont(deger, value)} TL";
+                var mountModel = SelectedList.FirstOrDefault(k => k.Model.ID == 1);
+                if (mountModel != null)
+                {
+                    aylikFiyatLbl.Text = $"Aylık Fiyat: {TeacherPriceCalculate(deger, mountModel)} TL";
+                }
+                float value = SelectedList.Where(k=>k.Model.ID != 1).Sum(i => i.Model.Money * i.Quantity);
+                fiyatLbl.Text = $"İlk Ay Fiyat: {Discont(deger, value)} TL";
             }
             catch
             {
                 fiyatLbl.Text = "Hatalı giriş yaptınız. Lütfen sadece sayı giriniz!";
+                aylikFiyatLbl.Text = "";
                 entry.Text = "";
             }
         }
 
-        private float Discont(int student, float money)
+        private float Discont(int studentCount, float money)
         {
-            float result = student * money;
+            float result = studentCount * money;
             float discont = 0;
-            if (student > 150)
+            if (studentCount > 150)
             {
-                discont = 30f / 100f * result;
+                discont = 15f / 100f * result;
             }
-            else if (student > 100)
-            {
-                discont = 20f / 100f * result;
-            }
-            else if (student > 50)
+            else if (studentCount > 100)
             {
                 discont = 10f / 100f * result;
             }
+            else if (studentCount > 50)
+            {
+                discont = 5f / 100f * result;
+            }
             result -= discont;
             return result;
+        }
+
+        private float TeacherPriceCalculate(int studentCount, PackeageViewModel model)
+        {
+            return model.Model.Money * model.Quantity * studentCount;
         }
 
         private void EditPageNavigate(object obj)
