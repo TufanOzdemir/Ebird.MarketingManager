@@ -23,7 +23,7 @@
     <AppxPackageDir>C:\Users\amoni\Desktop\Manager\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>1EF840CD88750196DB6A261293B37C7D2CE80F28</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>8555667CF11E0D6B3BEBE4D47BE1452AB8274205</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
   </PropertyGroup>
