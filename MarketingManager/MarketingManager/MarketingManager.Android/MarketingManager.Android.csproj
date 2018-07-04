@@ -94,6 +94,10 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\Data.csproj">
+      <Project>{D444864E-1629-4109-A77D-07D7ACDB56A6}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MarketingManager\MarketingManager.csproj">
       <Project>{86F7437D-786A-4A3D-B36B-D3BE7D86DDE0}</Project>
       <Name>MarketingManager</Name>

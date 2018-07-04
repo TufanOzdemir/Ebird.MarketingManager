@@ -1,7 +1,7 @@
-﻿using MarketingManager.Data;
-using System;
+﻿using Data;
+using Data.Models;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace MarketingManager.Container
@@ -22,7 +22,6 @@ namespace MarketingManager.Container
             PackeageList.Add(new Packeage() { ID = 4, Money = 110, Title = "Video Desteği" });
             PackeageList.Add(new Packeage() { ID = 5, Money = 45, Title = "Proje Yönetim Sistemi Desteği" });
             PackeageList.Add(new Packeage() { ID = 6, Money = 80, Title = "Yarışma ve Etüt Desteği" });
-            //PackeageList.Add(new Packeage() { ID = 7, Money = 30, Title = "Sertifikalı Eğitmen Geliştirme Desteği" });
         }
     }
 }

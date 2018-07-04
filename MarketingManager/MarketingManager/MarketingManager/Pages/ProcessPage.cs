@@ -1,10 +1,9 @@
-﻿using MarketingManager.Components;
+﻿using Data.Models;
+using MarketingManager.Components;
 using MarketingManager.Container;
-using MarketingManager.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 namespace MarketingManager.Pages

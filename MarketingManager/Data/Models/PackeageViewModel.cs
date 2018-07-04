@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MarketingManager.Data
+namespace Data.Models
 {
     public class PackeageViewModel
     {
