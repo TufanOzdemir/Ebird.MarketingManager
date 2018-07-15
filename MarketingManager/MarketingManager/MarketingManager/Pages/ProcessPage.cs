@@ -157,7 +157,7 @@ namespace MarketingManager.Pages
                     aylikFiyatLbl.Text = $"Aylık Fiyat: {TeacherPriceCalculate(deger, mountModel)} TL";
                 }
                 float value = SelectedList.Where(k=>k.Model.ID != 1).Sum(i => i.Model.Money * i.Quantity);
-                fiyatLbl.Text = $"İlk Ay Fiyat: {Discont(deger, value)} TL";
+                fiyatLbl.Text = $"İlk Ay Fiyat: {Discont(deger, value) + TeacherPriceCalculate(deger, mountModel)} TL";
             }
             catch
             {
@@ -170,26 +170,26 @@ namespace MarketingManager.Pages
         private float Discont(int studentCount, float money)
         {
             float result = studentCount * money;
-            float discont = 0;
-            if (studentCount > 150)
-            {
-                discont = 15f / 100f * result;
-            }
-            else if (studentCount > 100)
-            {
-                discont = 10f / 100f * result;
-            }
-            else if (studentCount > 50)
-            {
-                discont = 5f / 100f * result;
-            }
-            result -= discont;
+            //float discont = 0;
+            //if (studentCount > 150)
+            //{
+            //    discont = 15f / 100f * result;
+            //}
+            //else if (studentCount > 100)
+            //{
+            //    discont = 10f / 100f * result;
+            //}
+            //else if (studentCount > 50)
+            //{
+            //    discont = 5f / 100f * result;
+            //}
+            //result -= discont;
             return result;
         }
 
         private float TeacherPriceCalculate(int studentCount, PackeageViewModel model)
         {
-            return model.Model.Money * model.Quantity * studentCount;
+            return model.Model.Money * studentCount;
         }
 
         private void EditPageNavigate(object obj)
